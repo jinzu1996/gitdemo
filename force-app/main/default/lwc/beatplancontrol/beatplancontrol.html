@@ -1,0 +1,50 @@
+<template>
+<lightning-card icon-name="custom:custom19" title='CSV File Read'>
+    <template if:true={showLoadingSpinner}>
+        <lightning-spinner alternative-text="Loading"></lightning-spinner>
+    </template>
+    
+    <div style="padding-left: 25px">
+        
+    <a href={url} download>Download CSV Template</a> 
+    </div>
+        <div style="padding: 25px">
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-small-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+        <span>
+             <b>This Is Sample Instruction</b>
+            <b>Please Download CSV and Populate the Data.</b>
+            <ol>
+                <li style = "line-height: 30px">&#9679; Please download the sample CSV from the above option</li>
+                <li style = "line-height: 30px">&#9679; Please don't change the column position</li>
+                <li style = "line-height: 30px">&#9679; Populate the desired data in the CSV sheet</li>
+                <li style = "line-height: 30px">&#9679; You can select from the sample email templates and you can edit the content as well</li>
+                <li style = "line-height: 30px">&#9679; Please select the below fields and then upload the document</li>
+                <li style = "line-height: 30px">&#9679; Pending: Email requires a response from the customer</li>
+                <li style = "line-height: 30px">&#9679; Solved: Email does not require a response from the customer </li>
+                <li style = "line-height: 30px">&#9679; On Hold: Case requires agent action </li>
+              </ol> 
+        </span>
+        </div>
+        <div class="slds-col slds-small-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+            <span>
+                <!-- <lightning-file-upload accept={acceptedCSVFormats} label="Upload CSV Document"  onuploadfinished={uploadHelper}></lightning-file-upload> <br> -->
+                <lightning-input accept=".csv" label="file uploader" name="file uploader" onchange={handleFilesChange} type="file" ></lightning-input> &nbsp;
+                <div class="slds-text-body_small slds-text-color_success">{fileName}</div> <br>
+                <div class="slds-col">
+                    <lightning-button class="slds-m-top--medium" label={UploadFile} onclick  ={handleSave} variant="brand" disabled={isTrue}></lightning-button> &nbsp;
+                </div>
+                <template if:true={data}>
+                <!-- sldsValidatorIgnoreNextLine -->
+                <lightning-datatable data={data} columns={columns}  key-field="id"> </lightning-datatable>
+                </template>
+            </span>
+            </div>
+        </div>
+        
+    </div><br/>
+    
+
+</lightning-card>
+
+</template>

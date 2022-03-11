@@ -1,0 +1,8 @@
+<aura:component controller="SetGeolocation" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+	
+    <aura:attribute name="SubmitStatus" type="boolean" default="false" />
+    <aura:attribute name="latitude" type="decimal" default=""/>
+	<aura:attribute name="longitude" type="decimal" default=""/>
+    <aura:handler name="init" action="{!c.myAction}" value="{!this}"/>
+        
+</aura:component>

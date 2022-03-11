@@ -1,0 +1,214 @@
+<template>        
+    <!-- <div class="slds-scrollable" style="height:35rem;width:100rem"> -->
+        <article class="slds-card slds-p-around_small">
+            <div class="slds-grid slds-p-around_small slds-theme_shade">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                <span class="slds-icon_container slds-icon-standard-contact" title="Asset Under Renewal Records">
+                    <lightning-icon icon-name="custom:custom63" alternative-text="Asset Under Renewal Records" title="Innoviti's Beat Plan" size="small"></lightning-icon>
+                    <span class="slds-assistive-text">S</span>
+                </span>
+                </div>
+                <!-- <div class="slds-media__body"> -->
+                    <!-- <h2 class="slds-card__header-title">
+                        <span>Innoviti's Beat Plan</span>
+                    </h2> &emsp;   -->
+                    <h2>
+                        <b>Innoviti's Beat Plan</b>
+                    </h2> &emsp; 
+                    <span>
+                    <div style="padding-top: 0px;padding-bottom: 23px;">
+                    <lightning-combobox name="Region" label="Region" placeholder="Select Region" options={upsellOptions} onchange={handleUpsellChange}></lightning-combobox>
+                    </div>
+                    </span>
+                     &emsp; &emsp; 
+                    <span>
+                    <div class=" slds-grid">
+                        <!-- <p> -->
+                        <!-- <lightning-button variant="brand" label="New" title="Save" onclick={viewAUR} class=""></lightning-button> &nbsp; -->
+                        <lightning-button variant="brand" label="Weekly Assigned" title="Save" onclick={handleSave} class=""></lightning-button> &nbsp;
+                        <lightning-button variant="brand" label="Today Assigned" title="update" onclick={handleSave1} class=""></lightning-button> &nbsp;
+                        <!-- </p> -->
+                    </div>
+                    </span> &emsp; &emsp; &emsp;
+                <!-- </div> -->
+                
+                <div class=" slds-grid" style="padding-top: 0px;padding-bottom: 16px;">
+                <lightning-input type="search" onchange={handleKeyChange}  class="slds-var-m-bottom_small" label="Search"  value={searchKey} placeholder="Store Name" size="4"></lightning-input> &nbsp;
+                <lightning-combobox name="progress" label="Store Status" value="" placeholder="Select Days" options={options}   onchange={handleChangeyu} ></lightning-combobox> &nbsp;
+                <lightning-file-upload name="TemplateCSV" accept={acceptedFormats} label="Upload CSV Document"  onuploadfinished={handleUploadFinished}></lightning-file-upload> 
+
+                </div>
+                <!-- <div class="slds-media__body"> -->
+                    <!-- <p> -->
+                        <!-- <lightning-combobox name="progress" label="Status" value="" placeholder="Select Progress" options={options}   onchange={handleChangemax} ></lightning-combobox> -->
+                        <!-- <lightning-input-field class="annUSD1" field-name="Status_List__c" name = "update" variant="label-hidden" data-target-id={aur.Id} onchange={handlechildChange1}></lightning-input-field>  -->
+                        <!-- <lightning-input type="search" onchange={handleKeyChange}  class="slds-var-m-bottom_small" label="Search"  value={searchKey} placeholder="Store Name" size="4"></lightning-input> -->
+                        <!-- <lightning-button label="Refresh" onclick={refreshComponent}></lightning-button>-->
+                    <!-- </p> -->
+                <!-- </div> -->
+            </header>
+            </div>
+            <div class="slds-card__body brd">
+
+        <!-- <template if:true={records}> -->
+
+            <div class="slds-grid slds-wrap slds-p-left_small" style="border-bottom: 1px solid lightgrey;font-weight: 700;"> 
+                <!-- <div class="slds-col slds-size_1-of-12 slds-align_absolute-center">
+                    Id
+                </div>  -->
+                <div class="slds-col slds-small-size_1-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-align_absolute-center">
+                    <div class="slds-box_x-small">
+                    Name
+                    </div>
+                </div> 
+                <div class="slds-col slds-small-size_1-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-align_absolute-center">
+                    <div class="slds-box_x-small">
+                    Stage
+                </div>
+                </div> 
+                <div class="slds-col slds-small-size_1-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-align_absolute-center">
+                    <div class="slds-box_x-small">
+                    Dispo
+                </div>
+                </div> 
+                <div class="slds-col slds-small-size_1-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-align_absolute-center">
+                    <div class="slds-box_x-small">
+                    Assigned To (Weekly)
+                </div>
+                </div>
+                <div class="slds-col slds-small-size_1-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-align_absolute-center">
+                    <div class="slds-box_x-small">
+                    Weekly Assigned
+                </div>
+                </div> 
+                <div class="slds-col slds-small-size_1-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-align_absolute-center">
+                    <div class="slds-box_x-small">
+                    Today's Assigned
+                </div>
+                </div> 
+                
+                <template for:each={days} for:item="day">
+                    <div class="slds-col slds-small-size_1-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-align_absolute-center" key={day} >
+                        <div class="slds-box_x-small" >
+                            {day}
+                        </div>
+                    </div>
+                </template>
+                </div>
+                
+                <template if:true={visibleContacts}>
+                <template for:each={visibleContacts} for:item="aur">
+                <div key={aur.Id}>
+                    <lightning-record-edit-form record-id={aur.Id} object-api-name="Store_Account__c">
+                    <div class="slds-grid slds-wrap slds-var-p-left_small" style="border-bottom: 1px solid lightgrey;"> 
+                        <!-- <div class="slds-col slds-size_1-of-12  slds-align_absolute-center" >
+                        <div class="slds-p-top_x-small">
+                            <p><lightning-formatted-url value={aur.Id} label={aur.Name} target="_blank" ></lightning-formatted-url></p>
+                        </div> 
+                        </div>  -->
+                        <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="1" padding="horizontal-small">
+                            <div class="slds-box_x-small">
+                                <!-- <lightning-output-field class="stageNme"  data-field="username" field-name= "Store_Name__c" data-target-id={aur.Id} variant="label-hidden" onchange={handlechildChange}></lightning-output-field> -->
+                                    <lightning-formatted-url value={aur.recordUrl} label={aur.Name} target="_self" ></lightning-formatted-url>
+                            </div> 
+                        </lightning-layout-item>  
+                        <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="1" padding="horizontal-small">
+                            <div class="slds-box_x-small">
+                                <lightning-output-field class="forecastCat" field-name="Stage__c" variant="label-hidden" data-target-id={aur.Id} onchange={handlechildChange}></lightning-output-field> 
+                            </div> 
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="1" padding="horizontal-small">
+                            <div class="slds-box_x-small">
+                                <lightning-output-field  class="agrType" field-name="Disposition__c" variant="label-hidden" data-target-id={aur.Id} onchange={handlechildChange}></lightning-output-field > 
+                            </div> 
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="1" padding="horizontal-small">
+                            <div class="slds-box_x-small">
+                                <lightning-formatted-text value={aur.ye6} data-target-id={aur.Id} ></lightning-formatted-text> 
+                            </div> 
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="1" padding="horizontal-small">
+                            <div class="slds-box_x-small" >
+                                <!-- <lightning-input-field class="annUSD" field-name="Executive_Name__c" name = "create" variant="label-hidden" data-target-id={aur.Id} onchange={handlechildChange}></lightning-input-field>  -->
+                                <lightning-combobox  placeholder="Select Sla" field-name="Executive_Name__c" name="Executive_Name__c" data-target-id={aur.Id}  options={slaOptions} onchange={handlechildChange}> </lightning-combobox>
+                            </div> 
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="1" padding="horizontal-small">
+                            <div class="slds-box_x-small">
+                                <!-- <lightning-input-field class="annUSD1" field-name="Executive_Name__c" name = "update" variant="label-hidden" data-target-id={aur.Id} onchange={handlechildChange1}></lightning-input-field>  -->
+                                <lightning-combobox  placeholder="Select Sla" field-name="Executive_Name__c" name="Executive_Name__c" data-target-id={aur.Id}  options={slaOptions} onchange={handlechildChange1}> </lightning-combobox>
+                            </div> 
+                        </lightning-layout-item> 
+                        
+                        <!-- <div class="slds-col slds-size_1-of-12 slds-align_absolute-center" >                            
+                            <lightning-button-icon icon-name="utility:edit" variant="bare" onclick={viewAUR} alternative-text="Edit" value={aur.Id} class="" title="Edit"></lightning-button-icon>
+                        </div> -->
+
+                        <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="1" padding="horizontal-small">
+                            <div class="slds-box_x-small">
+                                <!-- <lightning-formatted-url value={aur.recordUrl1} label={aur.to} target="_self" ></lightning-formatted-url> -->
+                                <lightning-formatted-text value={aur.to} data-target-id={aur.Id} ></lightning-formatted-text> 
+                            </div> 
+                        </lightning-layout-item>
+
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="1" padding="horizontal-small">
+                                <div class="slds-box_x-small">
+                                    
+                                    <lightning-formatted-text value={aur.ye} data-target-id={aur.Id} ></lightning-formatted-text> 
+                                    <!-- <lightning-icon icon-name="utility:warning" alternative-text="Warning!" variant="warning" title="warning variant xx-small" size="xx-small"></lightning-icon> -->
+                                    <!-- <lightning-output-field field-name="Status__c" variant="label-hidden" data-target-id={aur.Id} ></lightning-output-field>  -->
+                                </div> 
+                            </lightning-layout-item>
+                        
+                        
+                        <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="1" padding="horizontal-small">
+                            <div class="slds-box_x-small">
+                                <lightning-formatted-text value={aur.ye1} data-target-id={aur.Id} ></lightning-formatted-text> 
+                                <!-- <lightning-icon icon-name="utility:error" alternative-text="Error!" variant="error" title="error variant xx-small" size="xx-small"></lightning-icon> -->
+                                <!-- <lightning-output-field field-name="Status__c" variant="label-hidden" data-target-id={aur.Id} ></lightning-output-field>  -->
+                            </div> 
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="1" padding="horizontal-small">
+                            <div class="slds-box_x-small">
+                                <lightning-formatted-text value={aur.ye2} data-target-id={aur.Id} ></lightning-formatted-text>
+                                <!-- <lightning-output-field field-name="Status__c" variant="label-hidden" data-target-id={aur.Id} ></lightning-output-field>  -->
+                            </div> 
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="1" padding="horizontal-small">
+                            <div class="slds-box_x-small">
+                                <lightning-formatted-text value={aur.ye3} data-target-id={aur.Id} ></lightning-formatted-text>
+                                <!-- <lightning-output-field field-name="Status__c" variant="label-hidden" data-target-id={aur.Id} ></lightning-output-field>  -->
+                            </div> 
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="1" padding="horizontal-small">
+                            <div class="slds-box_x-small">
+                                <lightning-formatted-text value={aur.ye4} data-target-id={aur.Id} ></lightning-formatted-text>
+                                <!-- <lightning-output-field field-name="Status__c" variant="label-hidden" data-target-id={aur.Id} ></lightning-output-field>  -->
+                            </div> 
+                        </lightning-layout-item>
+
+                        <!-- <div class="slds-col slds-size_1-of-12 slds-align_absolute-center"> 
+                            <div class="slds-box_x-small">
+                                <lightning-formatted-text value={aur.ye5} data-target-id={aur.Id} ></lightning-formatted-text>
+                            </div> 
+                        </div>  -->
+
+                        </div>
+
+                </lightning-record-edit-form>
+                </div>
+
+                </template>
+                </template>
+
+                <div slot="footer" class="slds-align_absolute-center slds-var-p-around_small">
+                    <c-pagination records={totalContacts} onupdate={updateContactHandler}></c-pagination>
+                </div> 
+        </div>
+        </article>
+   <!-- </div> -->
+</template>

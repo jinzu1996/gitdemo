@@ -1,0 +1,13 @@
+.slds-modal__container {
+    width: 100%;
+    max-width: 90rem;
+    min-width: 30rem;
+    }
+
+    .brd{
+        border: 1px solid lightgrey;
+    }
+
+    .ht{
+        height: 2.5rem;
+    }
