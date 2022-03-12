@@ -9,7 +9,7 @@ private class OpportunityClstest
             Name = 'Pavan Mart',                                                                                                                                 // Store Name
             UTID__c = 'C05287A1',                                                                                                                                               // UTID
             MBO_EBO__c = 'MBO',                                                                                                                                                 // Store Type
-            Executive_Name__c = 'gunaseelandemo k',
+           // Executive_Name__c = 'gunaseelandemo k',
             Preferred_Brand__c = 'Samsung',                                                                                                                                     // Preferred Brand
             Status__c = 'ON TAP',                                                                                                                                               // Status
             Stage__c = 'On TAP',                                                                                                                                                // Stage
